@@ -1,0 +1,69 @@
+{% render 'partials/head.liquid' %}
+
+<header class="chat-header">
+    <h1>Community Drops</h1>
+    <p>Deel wat je van de oefening vond, lees ervaringen van anderen en steun elkaar in de reis door rouw. <b>je bent niet alleen</b></p>
+</header>
+
+<main class="chat-main">    
+
+<img src="/public/assets/blauwegradient.png" alt="">
+
+    <article class="chat-article">
+        <h2>Nieuwste berichten</h2>
+    </article>
+
+
+
+    {% for chat in chat %}
+        <section class="chat-message">
+            <h3>{{ chat.from }}</h3>
+            <span class="message-date">op 3 februari {{ chat.date | date: "%d %B" }}</span>
+            <p>{{ chat.text }}</p>
+
+            {% comment %} delete loop {% endcomment %}
+            
+            {% if chat.from == "Mikiyas" %}
+            <form method="post" action="/chat/delete/{{ chat.id }}" id="deleteForm">
+            <button type="submit" class="deleteBtn">Verwijder Bericht</button>
+            </form>
+            {% endif %}
+        </section>
+    {% endfor %}
+
+
+
+<!-- Plaats bericht button -->
+<button id="showFormButton" class="floating-button">
+    Plaats bericht
+</button> 
+
+<!-- Formulier Overlay -->
+<section id="overlay" class="overlay" aria-hidden="true">
+    <article class="overlay-content">
+
+        <header>
+            <h2>Deel je ervaring</h2>
+        </header>
+
+        <form class="overlay-form" method="post" action="/chat">
+            <label for="from">Naam</label>
+            <input type="text" id="from" name="from" aria-label="Naam" required>
+
+            <label for="text">Uw Bericht</label>
+            <textarea id="text" name="text" aria-label="Bericht schrijven" placeholder="bijv. verhaal over een dierbare die je bent verloren" required></textarea>
+
+            <footer>
+            <button type="submit" id="submitBtn">Ervaring Delen</button>
+                <button type="button" id="closeFormButton">Annuleer</button>
+            </footer>
+        </form>
+    </article>
+</section>
+
+
+</main>
+        
+<script src="/chat.js"></script>
+
+{% render 'partials/foot.liquid' %}
