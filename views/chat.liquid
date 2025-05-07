@@ -1,5 +1,31 @@
 {% render 'partials/head.liquid' %}
 
+
+{% comment %} skeleton {% endcomment %}
+<section id="page-skeleton" class="page-skeleton">
+
+<header class="chat-header">
+    <h1 class="skeleton-title"></h1>
+    <p  class="skeleton-text"></p>
+</header>
+
+<main class="chat-main">
+
+    <article class="chat-article">
+    <h2 class="skeleton-article-title"></h2>
+    </article>
+
+    <ul class="skeleton-messages">
+    {% for i in (1..5) %}
+        <li class="skeleton-item"></li>
+    {% endfor %}
+    </ul>
+
+    <button class="skeleton-button" disabled></button>
+</main>
+</section>
+
+
 <header class="chat-header">
     <h1>Community Drops</h1>
     <p>Deel wat je van de oefening vond, lees ervaringen van anderen en steun elkaar in de reis door rouw. <b>je bent niet alleen</b></p>
@@ -12,8 +38,6 @@
     <article class="chat-article">
         <h2>Nieuwste berichten</h2>
     </article>
-
-
 
     {% for chat in chat %}
         <section class="chat-message">
