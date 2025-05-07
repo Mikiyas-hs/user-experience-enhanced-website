@@ -7,6 +7,10 @@ document.getElementById("closeFormButton").addEventListener("click", function() 
 });
 
 
+
+
+
+
 // Delete button logic
 document.querySelectorAll(".deleteBtn").forEach(function(button) {
     button.addEventListener("click", function(event) {
@@ -33,3 +37,30 @@ document.querySelectorAll(".deleteBtn").forEach(function(button) {
         }, 2000);  
     });
 });
+
+
+
+// skeleton precieved perfomance
+document.addEventListener('DOMContentLoaded', () => {
+    // 1) Full-page skeleton tonen/verbergen
+    const skeleton = document.getElementById('page-skeleton');
+    const content  = document.getElementById('page-content');
+  
+    function showContent() {
+      skeleton.classList.add('hidden');
+      content.classList.remove('hidden');
+    }
+  
+    // 2) Wachten tot de data word getoond daarna skeleton verbergen 
+    fetch('https://fdnd-agency.directus.app/items/dropandheal_messages?&limit=-1')
+      .then(response => response.json())
+      .then(data => {
+        showContent();
+      })
+      .catch(err => {
+        console.error('Error loading data:', err);
+        // Bij een fout de skeleton verwijderen zodat gebruiker niet vastloopt
+        showContent();
+      });
+  });
+  
